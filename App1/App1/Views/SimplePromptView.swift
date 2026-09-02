@@ -8,10 +8,6 @@
 import SwiftUI
 import FoundationModels
 
-enum FocusedField {
-    case prompt
-}
-
 struct SimplePromptView: View {
     @State private var prompt = "What is the capital of Paraguay?"
     @State private var isResponding = false
@@ -22,6 +18,8 @@ struct SimplePromptView: View {
     
     private func submitPrompt() {
         Task {
+            response = nil
+            error = nil
             let model = SystemLanguageModel.default
             if !model.isAvailable {
                 error = String(localized: "model_not_available")
@@ -33,15 +31,15 @@ struct SimplePromptView: View {
                 return
             }
             isResponding = true
-            defer { isResponding = false }
-            response = nil
-            error = nil
+            defer {
+                isResponding = false
+                focusedField = .prompt
+                promptSelection = .init(range: prompt.startIndex..<prompt.endIndex)
+            }
             let session = LanguageModelSession(model: model)
             do {
                 let response = try await session.respond(to: prompt)
                 self.response = response.content
-                focusedField = .prompt
-                promptSelection = .init(range: prompt.startIndex..<prompt.endIndex)
             } catch {
                 self.error = error.localizedDescription
             }

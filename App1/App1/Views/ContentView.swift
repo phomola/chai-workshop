@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+enum FocusedField {
+    case prompt
+}
+
 struct ContentView: View {
     var body: some View {
         TabView {
@@ -23,6 +27,10 @@ struct ContentView: View {
             SimplePromptView()
                 .tabItem {
                     Label("simple_prompt", systemImage: "1.square")
+                }
+            StructuredOutputView()
+                .tabItem {
+                    Label("structured_output", systemImage: "2.square")
                 }
         }
         .tabViewStyle(.sidebarAdaptable)
