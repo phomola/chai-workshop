@@ -32,6 +32,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("structured_output", systemImage: "2.square")
                 }
+            ToolCallingView()
+                .tabItem {
+                    Label("tool_calling", systemImage: "3.square")
+                }
         }
         .tabViewStyle(.sidebarAdaptable)
     }
