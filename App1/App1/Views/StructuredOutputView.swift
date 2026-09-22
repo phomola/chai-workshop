@@ -78,9 +78,9 @@ struct StructuredOutputView: View {
             }
         }
         .padding()
-        .onAppear {
-            focusedField = .prompt
-        }
+//        .onAppear {
+//            focusedField = .prompt
+//        }
     }
 }
 
