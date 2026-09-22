@@ -93,9 +93,9 @@ struct ToolCallingView: View {
             }
         }
         .padding()
-        .onAppear {
-            focusedField = .prompt
-        }
+//        .onAppear {
+//            focusedField = .prompt
+//        }
     }
 }
 
